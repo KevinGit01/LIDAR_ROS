@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 		
 		
 		coordinate.data.push_back((rand()%100)/1.1 + 0.3);
-        coordinate.data.push_back((rand()%100)/1.1 + 0.3);
+      	        coordinate.data.push_back((rand()%100)/1.1 + 0.3);
 		coordinate.data.push_back((rand()%100)/1.1 + 0.3);
 		
 		//Publish array
