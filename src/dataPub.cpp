@@ -29,10 +29,9 @@ int main(int argc, char **argv)
 		//assign array a random number between 0 and 255.
 		
 		
-	
-		coordinate.data.push_back(100.9);
-        coordinate.data.push_back(1.1);
-		coordinate.data.push_back(200.1);
+		coordinate.data.push_back((rand()%100)/1.1 + 0.3);
+        coordinate.data.push_back((rand()%100)/1.1 + 0.3);
+		coordinate.data.push_back((rand()%100)/1.1 + 0.3);
 		
 		//Publish array
 		pub.publish(coordinate);
