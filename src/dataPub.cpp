@@ -10,14 +10,14 @@
 
 int main(int argc, char **argv)
 {
-    
+
 
 	ros::init(argc, argv, "coordinatePublisher");
 
 	ros::NodeHandle n;
 
 	ros::Publisher pub = n.advertise<std_msgs::Float32MultiArray>("coordinates", 100);
-	ros::Rate loop_rate(100);
+	ros::Rate loop_rate(51);
 
 	while (ros::ok())
 	{
@@ -25,14 +25,14 @@ int main(int argc, char **argv)
 		//Clear array
 		coordinate.data.clear();
 		//for loop, pushing data in the size of the array
-		
+
 		//assign array a random number between 0 and 255.
-		
-		
+
+
 		coordinate.data.push_back((rand()%100)/1.1 + 0.3);
       	        coordinate.data.push_back((rand()%100)/1.1 + 0.3);
 		coordinate.data.push_back((rand()%100)/1.1 + 0.3);
-		
+
 		//Publish array
 		pub.publish(coordinate);
 		//Let the world know
