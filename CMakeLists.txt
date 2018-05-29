@@ -27,9 +27,11 @@ catkin_package()
 ## Build talker and listener
 include_directories(include ${catkin_INCLUDE_DIRS})
 
+add_library(SparkFun_VL53L1X_Arduino_Library src/SparkFun_VL53L1X_Arduino_Library.cpp)
 add_executable(dataPub src/dataPub.cpp)
-target_link_libraries(dataPub ${catkin_LIBRARIES})
+target_link_libraries(dataPub SparkFun_VL53L1X_Arduino_Library ${catkin_LIBRARIES})
 add_dependencies(dataPub lidar_3d_generate_messages_cpp)
+
 
 
 ## System dependencies are found with CMake's conventions
