@@ -48,9 +48,9 @@ def angle_pub():
 		if yaw == step:
 			yaw = 0
 			pitch = pitch +1                
-		rospy.loginfo("angle_published")
+	#	rospy.loginfo("angle_published")
 		rate.sleep()
-		if pitch == 100:
+		if pitch >= 1:
 			rospy.signal_shutdown("finished")
 	GPIO.cleanup();
 

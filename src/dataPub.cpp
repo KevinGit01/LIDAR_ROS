@@ -42,10 +42,10 @@ int main(int argc, char **argv)
 
 	ros::Publisher pub = n.advertise<std_msgs::Float32MultiArray>("coordinates", 100);
 	ros::Subscriber sub = n.subscribe("angle",50,coord_pub);
-	ros::Rate loop_rate(51);
+	ros::Rate loop_rate(50);
 
-	while (ros::ok())
-	{
+    while (ros::ok())
+	 {
 
 
 		coordinate.data.clear();
@@ -54,11 +54,11 @@ int main(int argc, char **argv)
 	    distanceSensor.startMeasurement();
         usleep(5000);
         sensor_result = distanceSensor.getDistance(); //Get the result of the measurement from the sensor
-		//sensor_result = sensor_result/1000.0;
-		sensor_result = 3;		
-		x = sensor_result*cos(angle_vertical)*cos(angle_horizontal);
-        y = sensor_result*cos(angle_vertical)*sin(angle_horizontal);
-        z = sensor_result*sin(angle_vertical);
+        sensor_result = sensor_result/1000.0;
+//		sensor_result = 3;		
+		x = sensor_result*cos(angle_vertical*M_PI/180.0)*cos(angle_horizontal*M_PI/180);
+        y = sensor_result*cos(angle_vertical*M_PI/180.0)*sin(angle_horizontal*M_PI/180);
+        z = sensor_result*sin(angle_vertical*M_PI/180.0);
 		coordinate.data.push_back(x);
       	coordinate.data.push_back(y);
 		coordinate.data.push_back(z);
@@ -67,12 +67,13 @@ int main(int argc, char **argv)
 		pub.publish(coordinate);
         myfile << x <<" "<< y <<" "<< z << endl;
 		//Let the world know
-		ROS_INFO("published");
+		ROS_INFO("coordinate published");
 		//Do this.
 		ros::spinOnce();
 		loop_rate.sleep();
 	}
 
+    ros::spin();
 	return 0;
 
 }
