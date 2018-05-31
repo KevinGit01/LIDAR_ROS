@@ -6,14 +6,26 @@
 #include <ctime>
 #include "ros/ros.h"
 #include <fstream>
+#include <math.h>
 
 #include "std_msgs/MultiArrayLayout.h"
 #include "std_msgs/MultiArrayDimension.h"
-
 #include "std_msgs/Float32MultiArray.h"
+#include "lidar_3d/angle.h"
+
 
 using namespace std;
+VL53L1X distanceSensor;
+float x=0,y=0,z=0,angle_h=0,angle_v=0,angle_horizontal = 0,angle_vertical = 0;
+std_msgs::Float32MultiArray coordinate;
+int sensor_result;
 
+
+
+void coord_pub(const lidar_3d::angle& angle){
+	angle_horizontal = angle.angle_h;
+	angle_vertical = angle.angle_v;
+  }
 
 
 int main(int argc, char **argv)
@@ -29,27 +41,27 @@ int main(int argc, char **argv)
 	ros::NodeHandle n;
 
 	ros::Publisher pub = n.advertise<std_msgs::Float32MultiArray>("coordinates", 100);
+	ros::Subscriber sub = n.subscribe("angle",50,coord_pub);
 	ros::Rate loop_rate(51);
-    
-    int sensor_result;
-    float x=0,y=0,z=0;
+
 	while (ros::ok())
 	{
-		std_msgs::Float32MultiArray coordinate;
-		//Clear array
+
+
 		coordinate.data.clear();
 		//for loop, pushing data in the size of the array
 
-		//assign array a random number between 0 and 255.
 	    distanceSensor.startMeasurement();
-        
         usleep(5000);
-
         sensor_result = distanceSensor.getDistance(); //Get the result of the measurement from the sensor
-		x = sensor_result/1000.0;
+		//sensor_result = sensor_result/1000.0;
+		sensor_result = 3;		
+		x = sensor_result*cos(angle_vertical)*cos(angle_horizontal);
+        y = sensor_result*cos(angle_vertical)*sin(angle_horizontal);
+        z = sensor_result*sin(angle_vertical);
 		coordinate.data.push_back(x);
-      	coordinate.data.push_back(0);
-		coordinate.data.push_back(0);
+      	coordinate.data.push_back(y);
+		coordinate.data.push_back(z);
 
 		//Publish array
 		pub.publish(coordinate);
@@ -64,3 +76,53 @@ int main(int argc, char **argv)
 	return 0;
 
 }
+
+
+/*
+
+class coordinate_pub
+{
+
+
+public:
+
+
+  void subAndPub(){
+				ROS_INFO("published 3");
+    pub = n.advertise<std_msgs::Float32MultiArray>("coordinates", 50);
+    sub = n.subscribe("angle",50,&coordinate_pub::coord_pub,this);
+
+}
+  
+  void coord_pub(const lidar_3d::angle& angle)
+  {
+     	distanceSensor.startMeasurement();
+        usleep(5000);
+        sensor_result = distanceSensor.getDistance(); //Get the result of the measurement from the sensor
+        sensor_result = sensor_result/1000.0;
+		x = sensor_result*cos(angle.angle_v)*cos(angle.angle_h);
+        x = sensor_result*cos(angle.angle_v)*sin(angle.angle_h);
+        z = sensor_result*sin(angle.angle_v);
+		coordinate.data.push_back(x);
+      	coordinate.data.push_back(y);
+		coordinate.data.push_back(z);
+
+		//Publish array
+		pub.publish(coordinate);
+
+  }
+
+private:
+    ros::NodeHandle n;
+	ros::Publisher pub;
+	ros::Subscriber sub; 
+
+};
+
+
+*/
+
+
+
+
+

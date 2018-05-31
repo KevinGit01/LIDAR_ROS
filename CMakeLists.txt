@@ -15,7 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 
-#add_message_files(FILES Num.msg)
+add_message_files(FILES angle.msg)
 #add_service_files(FILES AddTwoInts.srv)
 
 ## Generate added messages and services
