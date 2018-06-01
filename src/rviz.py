@@ -16,7 +16,7 @@ def cloud_plot(coordinate):
     marker = Marker(
                 type=Marker.SPHERE,
                 id=0,
-                lifetime=rospy.Duration(5),
+                lifetime=rospy.Duration(2.5),
                 pose=Pose(Point(x,y,z), Quaternion(0, 0, 0, 1)),
                 scale=Vector3(0.3, 0.3, 0.3),
                 header=Header(frame_id='map'),
