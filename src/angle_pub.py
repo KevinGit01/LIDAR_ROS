@@ -37,9 +37,9 @@ def angle_pub():
 
 	while not rospy.is_shutdown():
 		GPIO.output(STP,GPIO.HIGH);
-		time.sleep(sleep*4);
+		time.sleep(0.001);
 		GPIO.output(STP,GPIO.LOW);
-		time.sleep(sleep*4);
+		time.sleep(0.001);
 		pub.publish(angles)
 
 		yaw = yaw + 1;

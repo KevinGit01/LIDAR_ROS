@@ -14,11 +14,12 @@
 #include "lidar_3d/angle.h"
 
 
+
 using namespace std;
 VL53L1X distanceSensor;
-float x=0,y=0,z=0,angle_h=0,angle_v=0,angle_horizontal = 0,angle_vertical = 0;
+float x=0,y=0,z=0,angle_h=0,angle_v=0,angle_horizontal = 0,angle_vertical = 0,sensor_result = 0;
 std_msgs::Float32MultiArray coordinate;
-int sensor_result;
+
 
 
 
@@ -67,7 +68,7 @@ int main(int argc, char **argv)
 		pub.publish(coordinate);
         myfile << x <<" "<< y <<" "<< z << endl;
 		//Let the world know
-		ROS_INFO("coordinate published");
+		ROS_INFO("raw=%f;   x=%f y=%f z=%f",sensor_result,x,y,z);
 		//Do this.
 		ros::spinOnce();
 		loop_rate.sleep();
