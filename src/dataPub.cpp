@@ -54,7 +54,7 @@ int main(int argc, char **argv)
 	    distanceSensor.startMeasurement();
         usleep(5000);
         sensor_result = distanceSensor.getDistance(); //Get the result of the measurement from the sensor
-        sensor_result = sensor_result/1000.0;
+        sensor_result = sensor_result/100.0;
 //		sensor_result = 3;		
 		x = sensor_result*cos(angle_vertical*M_PI/180.0)*cos(angle_horizontal*M_PI/180);
         y = sensor_result*cos(angle_vertical*M_PI/180.0)*sin(angle_horizontal*M_PI/180);
