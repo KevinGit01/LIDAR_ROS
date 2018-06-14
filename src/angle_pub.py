@@ -5,6 +5,9 @@ from lidar_3d.msg import angle
 import random
 import RPi.GPIO as GPIO
 import time
+from RPIO import PWM
+
+
 
 def angle_pub():
 	STP = 37;
@@ -28,6 +31,11 @@ def angle_pub():
 	pitch = 0;
 	yaw = 0;
 	resolution = 1.8
+
+## servo
+	pulse = 690
+	servo = PWM.Servo()
+
 	pub = rospy.Publisher('angle', angle, queue_size=50)
 	rospy.init_node('angle_pub', anonymous=True)
 	rate = rospy.Rate(50)
@@ -47,6 +55,8 @@ def angle_pub():
 		angles.angle_v = pitch;
 		if yaw == step:
 			yaw = 0
+			servo.set_servo(17,pulse)
+			pulse = pulse + 5
 			pitch = pitch +1                
 	#	rospy.loginfo("angle_published")
 		rate.sleep()

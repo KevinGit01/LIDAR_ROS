@@ -1,5 +1,5 @@
 <launch>
-<node pkg="lidar_3d" type="angle_pub.py" name="stepper">
+<node pkg="lidar_3d" type="angle_pub.py" name="stepper" launch-prefix="sudo">
 </node>
 
 <node pkg="lidar_3d" type="dataPub" name="sensor">
