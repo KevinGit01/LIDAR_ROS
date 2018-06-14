@@ -8,5 +8,7 @@ ______
 
 ## Lidar Structure ##
 _____
-![ROS_Pi](https://github.com/KevinGit01/LIDAR_ROS/tree/master/pics/pi-ros-pc.png)
+![ROS_Pi](https://github.com/KevinGit01/LIDAR_ROS/blob/master/pics/pi-ros-pc.png)
+
+The TOF sensor returns the distance of the first obstacle it sees. The stepper motor returns the horizontal angle of the TOF sensor, and the servo returns the angle of the TOF sensor deviated from the vertical line. After the TOF sensor finished one sampling, the data is send to raspberry pi. Then ros on the raspberry pi publishes the coordinates of the obstacle onto the topic "coordinates". The ros node visulization on the ubuntu PC subscribes the coordinates topic and visulize the point cloud in the real time.
 
