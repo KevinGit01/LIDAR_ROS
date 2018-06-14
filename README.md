@@ -6,4 +6,7 @@ This repo is a lite 3D lidar controled by a raspberry pi using ROS. Recently, li
 ______
 [![lidar_2d](https://github.com/KevinGit01/LIDAR_ROS/blob/master/pics/lidar_2d.png)](https://youtu.be/_R8Wh5mv8cQ)
 
+## Lidar Structure ##
+_____
+![ROS_Pi](https://github.com/KevinGit01/LIDAR_ROS/tree/master/pics/pi-ros-pc.png)
 
